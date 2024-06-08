@@ -12,6 +12,7 @@ const Overlay = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
 const ModalContainer = styled.div`
     background: white;
     padding: 10px; /* Reduced padding */
@@ -29,6 +30,7 @@ const ModalContainer = styled.div`
         box-shadow: none;
         margin: 0;
         display: block; /* Ensures the modal takes up the entire A5 page */
+        font-size: 10px; /* Reduce font size for print */
     }
 `;
 
@@ -62,6 +64,25 @@ const PrintButton = styled.button`
         display: none;
     }
 `;
+
+const Section = styled.div`
+    margin-bottom: 10px;
+
+    @media print {
+        margin-bottom: 5mm; /* Adjust margin for print */
+    }
+`;
+
+const Result = styled.p`
+    margin: 0;
+    padding: 0;
+
+    @media print {
+        font-size: 10px; /* Reduce font size for print */
+    }
+`;
+
+
 
 const Modal: React.FC<{ onClose: () => void; onPrint: () => void; children: React.ReactNode }> = ({ onClose, onPrint, children }) => {
     return (

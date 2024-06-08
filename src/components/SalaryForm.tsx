@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import TableRow from './TableRow';
+import Section from './Section';
+
 import {
     setBasicSalary,
     addEarning,
@@ -58,10 +61,13 @@ const SalaryForm: React.FC = () => {
     const { employeeEPF, employerEPF, employerETF } = calculateEPF(totalEarningsForEPF, grossDeduction);
     const apit = calculateAPIT(grossEarnings);
     const netSalary = calculateNetSalary(grossEarnings, employeeEPF, apit);
+    const cts = grossEarnings + employerEPF + employerETF;
 
     const handlePrint = () => {
         window.print();
     };
+
+
 
     return (
         <div className="form-container">
@@ -164,18 +170,29 @@ const SalaryForm: React.FC = () => {
             </button>
             {isModalOpen && (
                 <Modal onClose={() => setIsModalOpen(false)} onPrint={handlePrint}>
-                    <div className="section">
+                    <Section>
                         <h2>Payslip Details</h2>
-                        <p className="result">Total Earnings: {totalEarnings.toFixed(2)}</p>
-                        <p className="result">Gross Deduction: {grossDeduction.toFixed(2)}</p>
-                        <p className="result">Gross Earnings: {grossEarnings.toFixed(2)}</p>
-                        <p className="result">Employee EPF: {employeeEPF.toFixed(2)}</p>
-                        <p className="result">Employer EPF: {employerEPF.toFixed(2)}</p>
-                        <p className="result">Employer ETF: {employerETF.toFixed(2)}</p>
-                        <p className="result">APIT: {apit.toFixed(2)}</p>
-                        <p className="result">Net Salary: {netSalary.toFixed(2)}</p>
-                    </div>
+                        <table>
+                            <tbody>
+                                <TableRow label="Basic Salary:" value={salary.basicSalary.toFixed(2)} />
+                                <TableRow label="Gross Earnings:" value={totalEarnings.toFixed(2)} />
+                                <TableRow label="Gross Deduction:" value={grossDeduction.toFixed(2)} />
+                                <TableRow label="Employee EPF (8%):" value={employeeEPF.toFixed(2)} />
+                                <TableRow label="APIT:" value={apit.toFixed(2)} />
+                                <TableRow label="Net Salary (Take Home):" value={netSalary.toFixed(2)} />
+                            </tbody>
+                        </table>
+                        <h3>Contribution from Employer</h3>
+                        <table>
+                            <tbody>
+                                <TableRow label="Employer EPF (12%):" value={employerEPF.toFixed(2)} />
+                                <TableRow label="Employer ETF (3%):" value={employerETF.toFixed(2)} />
+                                <TableRow label="CTS (Cost to Company):" value={cts.toFixed(2)} />
+                            </tbody>
+                        </table>
+                    </Section>
                 </Modal>
+
             )}
         </div>
     );
