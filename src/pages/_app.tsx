@@ -1,8 +1,8 @@
+// src/pages/_app.tsx
+import '../styles/globals.css'; // Ensure this import is correct
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import store from '../store/store';
-import '../styles/globals.css';
-
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (

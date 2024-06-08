@@ -9,7 +9,6 @@ import {
     removeDeduction,
     reset,
 } from '../store/salarySlice';
-import styled from 'styled-components';
 import {
     calculateEPF,
     calculateNetSalary,
@@ -19,71 +18,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faRedo } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal'; // Import the Modal component
-
-const FormContainer = styled.div`
-    padding: 20px;
-`;
-
-const Label = styled.label`
-    display: block;
-    margin: 10px 0 5px;
-`;
-
-const Input = styled.input`
-    padding: 8px;
-    width: calc(100% - 18px);
-    margin-bottom: 10px;
-`;
-
-const CheckboxContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-`;
-
-const Button = styled.button`
-    padding: 10px 15px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 5px;
-
-    &:hover {
-        background-color: #005bb5;
-    }
-
-    &:focus {
-        outline: none;
-    }
-`;
-
-const RemoveButton = styled(Button)`
-    background-color: #e53e3e;
-
-    &:hover {
-        background-color: #c53030;
-    }
-`;
-
-const Result = styled.p`
-    margin: 10px 0;
-`;
-
-const Section = styled.div`
-    margin-bottom: 20px;
-`;
-
-const FlexRow = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    & > * {
-        margin-right: 10px;
-    }
-`;
 
 const SalaryForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -130,117 +64,121 @@ const SalaryForm: React.FC = () => {
     };
 
     return (
-        <FormContainer className="bg-gray-100 p-6"> 
-            <Section>
-                <Label>Basic Salary:</Label>
-                <Input
+        <div className="form-container">
+            <div className="section">
+                <label className="label">Basic Salary:</label>
+                <input
                     type="number"
                     value={salary.basicSalary}
                     onChange={(e) => dispatch(setBasicSalary(Number(e.target.value)))}
+                    className="input"
                 />
-            </Section>
-            <Section>
+            </div>
+            <div className="section">
                 <h2>Earnings</h2>
                 {salary.earnings.map((earning) => (
-                    <FlexRow key={earning.id}>
+                    <div key={earning.id} className="flex-row">
                         <span>
-                            {earning.name}: {earning.amount.toFixed(2)} 
+                            {earning.name}: {earning.amount.toFixed(2)}
                         </span>
-                        <RemoveButton onClick={() => dispatch(removeEarning(earning.id))}>
+                        <button onClick={() => dispatch(removeEarning(earning.id))} className="remove-button">
                             <FontAwesomeIcon icon={faTrash} />
-                        </RemoveButton>
-                    </FlexRow>
+                        </button>
+                    </div>
                 ))}
-                <FlexRow>
-                    <Input
+                <div className="flex-row">
+                    <input
                         type="text"
                         placeholder="Earning Name"
                         value={earningName}
                         onChange={(e) => setEarningName(e.target.value)}
+                        className="input"
                     />
-                    <Input
+                    <input
                         type="number"
                         placeholder="Earning Amount"
                         value={earningAmount}
                         onChange={(e) => setEarningAmount(Number(e.target.value))}
+                        className="input"
                     />
-                    <CheckboxContainer>
-                        <Label>
+                    <div className="checkbox-container">
+                        <label className="label">
                             EPF/ETF Applicable
-                            <Input
+                            <input
                                 type="checkbox"
                                 checked={earningEPF}
                                 onChange={(e) => setEarningEPF(e.target.checked)}
                                 style={{ marginLeft: '10px' }}
                             />
-                        </Label>
-                    </CheckboxContainer>
-                </FlexRow>
-                <Button onClick={handleAddEarning}>Add Earning</Button>
-            </Section>
-            <Section>
+                        </label>
+                    </div>
+                </div>
+                <button onClick={handleAddEarning} className="button">Add Earning</button>
+            </div>
+            <div className="section">
                 <h2>Deductions</h2>
                 {salary.deductions.map((deduction) => (
-                    <FlexRow key={deduction.id}>
+                    <div key={deduction.id} className="flex-row">
                         <span>
-                            {deduction.name}: {deduction.amount.toFixed(2)} 
+                            {deduction.name}: {deduction.amount.toFixed(2)}
                         </span>
-                        <RemoveButton onClick={() => dispatch(removeDeduction(deduction.id))}>
+                        <button onClick={() => dispatch(removeDeduction(deduction.id))} className="remove-button">
                             <FontAwesomeIcon icon={faTrash} />
-                        </RemoveButton>
-                    </FlexRow>
+                        </button>
+                    </div>
                 ))}
-                <FlexRow>
-                    <Input
+                <div className="flex-row">
+                    <input
                         type="text"
                         placeholder="Deduction Name"
                         value={deductionName}
                         onChange={(e) => setDeductionName(e.target.value)}
+                        className="input"
                     />
-                    <Input
+                    <input
                         type="number"
                         placeholder="Deduction Amount"
                         value={deductionAmount}
                         onChange={(e) => setDeductionAmount(Number(e.target.value))}
+                        className="input"
                     />
-                    <CheckboxContainer>
-                        <Label>
+                    <div className="checkbox-container">
+                        <label className="label">
                             EPF/ETF Applicable
-                            <Input
+                            <input
                                 type="checkbox"
                                 checked={deductionEPF}
                                 onChange={(e) => setDeductionEPF(e.target.checked)}
                                 style={{ marginLeft: '10px' }}
                             />
-                        </Label>
-                    </CheckboxContainer>
-                </FlexRow>
-                <Button onClick={handleAddDeduction}>Add Deduction</Button>
-            </Section>
-            <Button onClick={() => dispatch(reset())}>
+                        </label>
+                    </div>
+                </div>
+                <button onClick={handleAddDeduction} className="button">Add Deduction</button>
+            </div>
+            <button onClick={() => dispatch(reset())} className="button">
                 <FontAwesomeIcon icon={faRedo} /> Reset
-            </Button>
-            <Button onClick={() => setIsModalOpen(true)}>
+            </button>
+            <button onClick={() => setIsModalOpen(true)} className="button">
                 Submit
-            </Button>
+            </button>
             {isModalOpen && (
                 <Modal onClose={() => setIsModalOpen(false)} onPrint={handlePrint}>
-                    <Section>
+                    <div className="section">
                         <h2>Payslip Details</h2>
-                        <Result>Total Earnings: {totalEarnings.toFixed(2)}</Result>
-                        <Result>Gross Deduction: {grossDeduction.toFixed(2)}</Result>
-                        <Result>Gross Earnings: {grossEarnings.toFixed(2)}</Result>
-                        <Result>Employee EPF: {employeeEPF.toFixed(2)}</Result>
-                        <Result>Employer EPF: {employerEPF.toFixed(2)}</Result>
-                        <Result>Employer ETF: {employerETF.toFixed(2)}</Result>
-                        <Result>APIT: {apit.toFixed(2)}</Result>
-                        <Result>Net Salary: {netSalary.toFixed(2)}</Result>
-                    </Section>
+                        <p className="result">Total Earnings: {totalEarnings.toFixed(2)}</p>
+                        <p className="result">Gross Deduction: {grossDeduction.toFixed(2)}</p>
+                        <p className="result">Gross Earnings: {grossEarnings.toFixed(2)}</p>
+                        <p className="result">Employee EPF: {employeeEPF.toFixed(2)}</p>
+                        <p className="result">Employer EPF: {employerEPF.toFixed(2)}</p>
+                        <p className="result">Employer ETF: {employerETF.toFixed(2)}</p>
+                        <p className="result">APIT: {apit.toFixed(2)}</p>
+                        <p className="result">Net Salary: {netSalary.toFixed(2)}</p>
+                    </div>
                 </Modal>
             )}
-        </FormContainer>
+        </div>
     );
 };
 
 export default SalaryForm;
-

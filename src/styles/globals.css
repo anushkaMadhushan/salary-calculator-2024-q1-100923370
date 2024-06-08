@@ -1,3 +1,151 @@
+/* src/styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global Styles */
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 240, 240, 240;
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+button {
+    padding: 10px 15px;
+    color: white;
+    background-color: #0070f3;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+button:focus {
+    outline: none;
+}
+
+input {
+    padding: 8px;
+    width: calc(100% - 18px);
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.result {
+    margin: 10px 0;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.flex-row>* {
+    margin-right: 10px;
+}
+
+.remove-button {
+    background-color: #e53e3e;
+}
+
+.remove-button:hover {
+    background-color: #c53030;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        width: 148mm;
+        height: 210mm;
+    }
+
+    .print-container {
+        width: 148mm;
+        height: 210mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        page-break-inside: avoid;
+    }
+
+    .print-modal {
+        width: 148mm;
+        height: 210mm;
+        box-sizing: border-box;
+        padding: 10mm;
+        /* Set padding suitable for A5 */
+        border: none;
+    }
+
+    .section {
+        margin: 10px 0;
+    }
+
+    .result {
+        margin: 5px 0;
+    }
+
+    h2 {
+        margin: 0;
+    }
+}

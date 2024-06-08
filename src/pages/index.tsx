@@ -31,7 +31,7 @@ const Tab = styled.button<{ $active: boolean }>`
 `;
 
 const IndexPage: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<string>('salary');
+    const [activeTab, setActiveTab] = useState<string>('master');
 
     return (
         <Container>
