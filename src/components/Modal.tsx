@@ -1,4 +1,3 @@
-// src/components/Modal.tsx
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,18 +12,23 @@ const Overlay = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
 const ModalContainer = styled.div`
     background: white;
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     border-radius: 8px;
     max-width: 500px;
     width: 100%;
     position: relative;
+
     @media print {
-        padding: 0;
+        size: A5;
+        width: 148mm;
+        height: 210mm;
+        padding: 10mm; /* Set padding suitable for A5 */
         border-radius: 0;
         box-shadow: none;
+        margin: 0;
+        display: block; /* Ensures the modal takes up the entire A5 page */
     }
 `;
 
@@ -36,6 +40,7 @@ const CloseButton = styled.button`
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+
     @media print {
         display: none;
     }
