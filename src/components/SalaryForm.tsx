@@ -41,7 +41,7 @@ const SalaryForm: React.FC = () => {
         dispatch(addEarning({ id, name: earningName, amount: earningAmount, epf: earningEPF }));
         setEarningName('');
         setEarningAmount(0);
-        setEarningEPF(false);
+        setEarningEPF(false);  
     };
 
     const handleAddDeduction = () => {
